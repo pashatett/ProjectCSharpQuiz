@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,11 +12,15 @@ namespace ProjectCSharpQuiz
         public static void Menu()
         {
             Account acc = new Account();
+            acc.QuestionsHistory();//чтоб создать файлы в которых вопросы
+            acc.QuestionsSpace();
+            acc.QuestionsAnimal();
             Console.WriteLine("Добро пожаловать в викторину!");
             Console.WriteLine("Выберите действие: ");
             Console.WriteLine("1)Регистрация\n" +
                                 "2)Вход в аккаунт\n" +
                                 "3)Выход");
+
 
             ConsoleKey key = Console.ReadKey().Key;
 
@@ -27,6 +31,7 @@ namespace ProjectCSharpQuiz
                 acc.SignUp();
                 acc.Menu();
             }
+
 
             //вход в аккаунт
             if (key == ConsoleKey.NumPad2)
