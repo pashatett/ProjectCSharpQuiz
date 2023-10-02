@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProjectCSharpQuiz
 {
@@ -58,6 +59,7 @@ namespace ProjectCSharpQuiz
 
             int perc = 100 / questions.Length * score;
             Console.WriteLine($"Игра окончена! Ваш результат: {score}/{questions.Length} {perc}%");
+            Console.ReadKey();
             return perc;
         }
 
@@ -274,19 +276,19 @@ namespace ProjectCSharpQuiz
             sr.Close();
             using (StreamWriter sw = new StreamWriter(path, true))
             {
-                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + "\n");
+                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + " " + 0 + "\n");
             }
             using (StreamWriter sw = new StreamWriter("InfoAnimal.txt", true))
             {
-                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + "\n");
+                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + " " + 0 + "\n");
             }
             using (StreamWriter sw = new StreamWriter("InfoSpace.txt", true))
             {
-                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + "\n");
+                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + " " + 0 + "\n");
             }
             using (StreamWriter sw = new StreamWriter("InfoHistory.txt", true))
             {
-                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + "\n");
+                sw.Write(_login + " " + _password + " " + _date.ToShortDateString() + " " + 0 + "\n");
             }
         }
 
@@ -397,6 +399,33 @@ namespace ProjectCSharpQuiz
             }
             Console.ReadKey();
             Menu();
+        }
+
+        //файлы с вопросами
+        public void QuestionsAnimal()
+        {
+            using (FileStream fs = File.Open("Animal.txt", FileMode.OpenOrCreate))
+                fs.Close();
+            System.IO.File.WriteAllText("Animal.txt", string.Empty);//очистить файл если он там есть
+            string text = "Какое животное обитает только в Китае?\r\nПанда\r\nМуж овцы — это...\r\nБаран\r\nКакая бабочка вредит людям тем, что портит одежду?\r\nМоль\r\nКакая из птиц умеет летать задом наперед? \r\nКолибри\r\nЗакончите название басни И. Крылова: «Стрекоза и ….»\r\nМуравей\r\nКак называется специальный ящик для содержания пчёл?\r\nУлей\r\nУ какой птицы самый большой размах крыльев? \r\nАльбатрос \r\nКакая наука изучает ископаемых животных?\r\nПалеонтология\r\nКак называются детёныши коровы?\r\nТелята\r\nКакой автомобиль, названный в честь хищника, существует? \r\nЯгуар\r\nВ какую эру жили динозавры?\r\nМезозойская\r\nКак называется орган дыхания рыб?\r\nЖабры\r\nЛошадей какого цвета называют вороными?\r\nЧёрный\r\nСимволом чего считается сова?\r\nМудрости \r\nДинозавр — это …\r\nРептилия\r\nКакая часть тела помогает кузнечику стрекотать?\r\nКрылья\r\nЧто означает название «птерозавр»?\r\nЛетающий ящер\r\n";
+            System.IO.File.WriteAllText("Animal.txt", text);
+        }
+        public void QuestionsSpace()
+        {
+
+            using (FileStream fs = File.Open("Space.txt", FileMode.OpenOrCreate))
+                fs.Close();
+            System.IO.File.WriteAllText("Space.txt", string.Empty);
+            string text = "Как называется звезда, которая находится ближе всего к Земле?\r\nСолнце\r\nКак звали советских собак-космонавтов, совершивших космический полёт на корабле «Спутник-5» 19 августа 1960 года?\r\nБелка и Стрелка\r\nСколько планет в Солнечной Системе?\r\n8\r\nКак звали первого человека в мировой истории, совершившего полёт в космическое пространство?\r\nЮрий Гагарин\r\nКак звали первую в мире женщину-космонавта?\r\nВалентина Терешкова\r\nВ каком месяце был запущен первый советский спутник Земли?\r\nОктябрь\r\nСамая яркая планета, которую можно увидеть с Земли без телескопа. Ее назвали в честь прекрасной богини любви.\r\nВенера\r\nЭто небесное тело известно своими кольцами из камней и кусков льда.\r\nСатурн\r\nЭта планета третья от Солнца, и имеет один спутник.\r\nЗемля\r\nСамая маленькая и быстрая из планет, на которой днем стоит жара до 350 °С, а ночью мороз в -170 °С.\r\nМеркурий\r\nКак называется Галактика, в которой находятся Земля, Солнечная система и все отдельные звёзды, видимые невооружённым глазом:\r\nМлечный Путь\r\nВ космосе Гагарин провел:\r\n108 минут\r\nЧерные дыры появляются:\r\nиз взрыва звезды\r\nДля наблюдения и исследования неба используют:\r\nтелескоп\r\n«Падающие звезды»:\r\nметеоры\r\nДата первого полета человека в космос:\r\n12.04.1961\r\nНовая звезда во Вселенной рождается:\r\nраз в 20 дней\r\nВспомните фамилию авиаконструктора, спроектировавшего первые ракеты:\r\nКоролев\r\nОпределите планету, на которой может пойти дождь из серной кислоты:\r\nВенера";
+            System.IO.File.WriteAllText("Space.txt", text);
+        }
+        public void QuestionsHistory()
+        {
+            using (FileStream fs = File.Open("History.txt", FileMode.OpenOrCreate))
+                fs.Close();
+            System.IO.File.WriteAllText("History.txt", string.Empty);
+            string text = "Столица  Древнего Египта:\r\nМемфис\r\nКак называются гробницы фараонов Древнего Египта(в им.п.):\r\nпирамида\r\nКому принадлежала верховная власть в Древнем Египте(в им.п.):\r\nфараон\r\nКакому фараону была  построена самая большая пирамида(в им.п.):\r\nХеопс\r\nКак называли бога Солнца – самого могущественного бога Древнего Египта:\r\nАмон-Ра\r\nКак звали жену фараона Эхнатона, скульптура которой до сих пор является символом красоты, гармонии и естественности:\r\nНефертити\r\nКакой древнегреческий историк назвал Египет «дар Нила»:\r\nГеродот\r\nКакому богу были посвящены Олимпийские игры в Древней Греции(в им.п.):\r\nЗевс\r\nУ какого бога древние греки просили успешного плавания(в им.п.):\r\nПосейдон";
+            System.IO.File.WriteAllText("History.txt", text);
         }
     }
 }
